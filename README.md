@@ -54,4 +54,4 @@ Todo el código vive en un único archivo `SalesAnalysisApp.java`, que contiene 
 
 ## Licencia
 
-Este proyecto no incluye una licencia definida. Agrega un archivo `LICENSE` si planeas distribuirlo públicamente.
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.

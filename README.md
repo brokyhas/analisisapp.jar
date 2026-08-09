@@ -1,46 +1,57 @@
-# analisisapp.jar
-# AnalyticaPyME — Ventas de Babahoyo, Los Ríos
+# AnalyticaPyME Babahoyo 📊
 
-Aplicación de escritorio para el análisis de ventas: carga de datos, tendencias, pronósticos, gráficos estadísticos y cartograma por zonas.
+Aplicación de escritorio en Java (Swing) para el análisis de ventas de pequeñas y medianas empresas en Babahoyo, Los Ríos, Ecuador. Permite registrar ventas por zona, visualizar tendencias, generar pronósticos simples y explorar los datos en un cartograma interactivo.
+
+## Características
+
+- **Carga de Ventas**: registro manual de ventas por zona, mes y año, con tabla editable.
+- **Importar/Exportar Excel (.xlsx)**: carga y guarda los datos de ventas en formato Excel, sin depender de librerías externas.
+- **Tendencias**: gráfico de líneas con el histórico de ventas mensuales por zona.
+- **Pronósticos**: estimación del próximo mes mediante regresión lineal simple.
+- **Gráficos Estadísticos**: gráfico de barras y gráfico circular (pastel) con la participación de cada zona.
+- **Cartograma interactivo**: mapa esquemático con zoom, desplazamiento (pan) y zonas arrastrables, con tamaño y color proporcional a las ventas.
+- **Modo claro / oscuro**: cambio de tema desde la barra superior.
 
 ## Requisitos
 
-- Tener **Java** instalado (versión 17 o superior).
-  - Si no lo tenés, descargalo gratis desde: https://adoptium.net
-  - Para comprobar si ya lo tenés, abrí una terminal/consola y escribí:
-    ```
-    java -version
-    ```
+- [JDK](https://adoptium.net/) 11 o superior (usa únicamente librerías estándar de Java: Swing, AWT y `org.w3c.dom`, sin dependencias externas).
 
-## Cómo ejecutar la aplicación
+## Compilar y ejecutar
 
-**Opción 1 — Doble clic**
-Hacé doble clic sobre el archivo `SalesAnalysisApp.jar`. En Windows y Mac, si Java está bien instalado, la aplicación debería abrirse directamente.
-
-**Opción 2 — Desde la terminal/consola**
-Ubicate en la carpeta donde está el archivo y ejecutá:
-
-```
+```bash
+javac SalesAnalysisApp.java
+jar cfe SalesAnalysisApp.jar SalesAnalysisApp *.class
 java -jar SalesAnalysisApp.jar
 ```
 
-## Notas
+En Windows (PowerShell), si `jar` no se reconoce como comando, usa la ruta completa a tu JDK, por ejemplo:
 
-- La aplicación no requiere instalación ni conexión a internet: es un solo archivo (`.jar`) autocontenido.
-- Al abrirse, ya trae datos de ejemplo cargados para que puedas explorar las pestañas sin necesidad de ingresar información primero.
-- Incluye modo claro/oscuro (botón en la esquina superior derecha).
+```powershell
+& "C:\Program Files\Java\jdk-21.0.11\bin\jar.exe" cfe SalesAnalysisApp.jar SalesAnalysisApp *.class
+```
 
-## Pestañas disponibles
+## Uso
 
-| Pestaña | Descripción |
+1. Abre la aplicación con `java -jar SalesAnalysisApp.jar` o haciendo doble clic sobre el `.jar` (requiere tener Java instalado).
+2. Ve a la pestaña **Carga de Ventas** para registrar ventas o importar un archivo Excel existente.
+3. Explora las pestañas **Tendencias**, **Pronósticos**, **Gráficos Estadísticos** y **Cartograma** para analizar los datos.
+
+## Estructura del proyecto
+
+Todo el código vive en un único archivo `SalesAnalysisApp.java`, que contiene la clase principal y varias clases de soporte:
+
+| Clase | Responsabilidad |
 |---|---|
-| 📥 Carga de Ventas | Ingreso y edición de registros de ventas por zona y mes |
-| 📈 Tendencias | Visualización de la evolución de ventas en el tiempo |
-| 🔮 Pronósticos | Estimaciones de ventas futuras basadas en los datos cargados |
-| 📊 Gráficos Estadísticos | Gráficos comparativos (barras, circular, etc.) |
-| 🗺️ Cartograma | Mapa esquemático con el tamaño/color de cada zona según sus ventas |
+| `SalesAnalysisApp` | Ventana principal y punto de entrada (`main`) |
+| `DataStore` | Almacén de datos de ventas en memoria |
+| `XlsxUtil` | Lectura y escritura de archivos `.xlsx` sin dependencias externas |
+| `PanelCarga` | Registro e importación/exportación de ventas |
+| `PanelTendencias` / `ChartLineaPanel` | Gráfico de tendencias mensuales |
+| `PanelPronosticos` / `ChartLineaPronosticoPanel` | Pronóstico por regresión lineal |
+| `PanelGraficos` / `ChartBarraPanel` / `ChartPastelPanel` | Gráficos estadísticos por zona |
+| `PanelCartograma` / `CartogramaPanel` | Mapa interactivo de zonas |
+| `AppConstants` | Colores, fuentes y constantes de la interfaz (modo claro/oscuro) |
 
-## Problemas comunes
+## Licencia
 
-- **"No se reconoce el comando java"**: Java no está instalado o no está en el PATH del sistema. Instalalo desde el enlace de arriba.
-- **El doble clic no abre nada**: probá la Opción 2 (desde terminal) para ver el mensaje de error exacto, o verificá que el archivo `.jar` esté asociado a Java en tu sistema operativo.
+Este proyecto no incluye una licencia definida. Agrega un archivo `LICENSE` si planeas distribuirlo públicamente.
